@@ -43,7 +43,7 @@ class TaskController extends Controller
         $task = new Task;
 
         $task->name = $request->taskName;
-
+        $task->completed = true;
         $task->save();
 
         Session::flash('success','New task has been successfully added');
@@ -88,11 +88,11 @@ class TaskController extends Controller
         ]);
 
         $task = Task::find($id);
-
+           
         $task->name = $request->updatedTaskName;
 
         $task->save();
-
+        echo("heyU");
         Session::flash('success','Task #'. $id . 'has been successfully updated');
 
         return redirect()->route('tasks.index');
@@ -108,7 +108,7 @@ class TaskController extends Controller
     {
         $task = Task::find($id);
         $task->delete();
-
+        echo("heyD");
         Session::flash('success', 'Task #' . $id . 'has been successfully deleted');
         return redirect()->route('tasks.index');
     }

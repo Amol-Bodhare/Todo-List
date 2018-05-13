@@ -45,8 +45,17 @@
                     <div class="form-group">
                         <input type="submit" value="Save Changes" class='btn btn-success btn-lg'>
                         <a href="" class='btn btn-danger btn-lg pull-right'>Go Back</a>
-                    </div>    
+                    </div> 
+                      
                 </form>
+                <form action="{{ route('tasks.destroy', [$taskUnderEdit->id]) }}" method='POST'>
+                        {{ csrf_field() }}
+                        <div class="form-group">
+                            <input type="hidden" name='_method' value='DELETE'>
+                            <input type="submit" class="btn btn-danger center-block" value='Delete'> 
+                        </div>
+                           
+                </form>   
             </div>
 
         </div> 

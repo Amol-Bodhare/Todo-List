@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css\index.blade.css" type="text/css"> 
     <title>Todo Application</title>
 </head>
 <body>
@@ -49,25 +50,31 @@
             @if (count($storedTasks) > 0)
                 <table class="table">
                     <thead>
-                        <th>Task #</th>
-                        <th>Name #</th>
-                        <th>Edit #</th>
-                        <th>Delete #</th>
+                        <th>Name </th>
+                        <th>Edit </th>
+                        <th>Status </th>
+                        
+                        
                     </thead>
 
                     <tbody>
                         @foreach ($storedTasks as $storedTask)
-                        <tr>
-                            <th>{{ $storedTask->id }}</th>
+                        <tr @if ($storedTask->completed)
+                                class="strikeout"
+                                @endif>
+                          
                             <td>{{ $storedTask->name }}</td>
                         <td><a href="{{ route('tasks.edit', ['tasks'=>$storedTask->id])}}" class='btn btn-default'>Edit</a></td>
+                            
                             <td>
-                            <form action="{{ route('tasks.destroy', ['tasks'=>$storedTask->id]) }}" method='POST'>
-                                {{ csrf_field() }}
-                                <input type="hidden" name='_method' value='DELETE'>
-                                <input type="submit" class="btn btn-danger" value='Delete'>    
-                            </form>    
+                                @if ($storedTask->completed)
+                                    Completed
+                                
+                                @else
+                                    Pending
+                                @endif  
                             </td> 
+                
                         </tr>
                         
                         @endforeach
