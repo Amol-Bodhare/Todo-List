@@ -1,3 +1,9 @@
 .colo {
     color:red;
 }
+.btn span.glyphicon {    			
+	opacity: 0;				
+}
+.btn.active span.glyphicon {				
+	opacity: 1;				
+}

@@ -43,7 +43,7 @@ class TaskController extends Controller
         $task = new Task;
 
         $task->name = $request->taskName;
-        $task->completed = true;
+        $task->completed = false;
         $task->save();
 
         Session::flash('success','New task has been successfully added');
@@ -81,20 +81,41 @@ class TaskController extends Controller
      * @param  \App\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        $this->validate($request, [
-            'updatedTaskName' => 'required|min:5|max:255',
-        ]);
-
-        $task = Task::find($id);
-           
-        $task->name = $request->updatedTaskName;
-
-        $task->save();
-        echo("heyU");
-        Session::flash('success','Task #'. $id . 'has been successfully updated');
-
+    public function update(Request $request,$id)
+    {   
+        if($request->has('updatedTaskName')) {
+            $this->validate($request, [
+                'updatedTaskName' => 'required|min:5|max:255',
+            ]);
+    
+            $task = Task::find($id);
+               
+            $task->name = $request->updatedTaskName;
+    
+            $task->save();
+            echo("heyU");
+            Session::flash('success','Task #'. $id . 'has been successfully updated');
+        
+        }  else {
+            if($request->has('checkBox')) {
+                $task = Task::find($id);
+               
+                $task->completed = false;
+    
+                $task->save();
+                Session::flash('success','Task #'. $id . 'is pending');
+                
+            } else {
+                $task = Task::find($id);
+               
+                $task->completed = true;
+    
+                $task->save();
+                Session::flash('success','Task #'. $id . 'has been completed');
+            }
+        }
+       
+        
         return redirect()->route('tasks.index');
     }
 

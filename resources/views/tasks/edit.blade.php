@@ -5,8 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <title>Todo Application</title>
+    <title>Todo Application - Edit Task</title>
 </head>
 <body>
     <div class="container">
@@ -40,8 +43,9 @@
                 {{ csrf_field() }}
                 <input type="hidden" name='_method' value='PUT'>
                     <div class="form-group">
-                    <input type="text" name='updatedTaskName' class='form-control input-lg' value='{{ $taskUnderEdit->name }}'>
-                    </div>
+                    <input type="text" name='updatedTaskName' class='form-control input-lg' dataanimal='update' value='{{ $taskUnderEdit->name }}'>
+                       
+                </div>
                     <div class="form-group">
                         <input type="submit" value="Save Changes" class='btn btn-success btn-lg'>
                         <a href="" class='btn btn-danger btn-lg pull-right'>Go Back</a>

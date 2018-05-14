@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css\index.blade.css" type="text/css"> 
     <title>Todo Application</title>
@@ -50,31 +53,57 @@
             @if (count($storedTasks) > 0)
                 <table class="table">
                     <thead>
-                        <th>Name </th>
+                        {{-- <th>Name </th>
                         <th>Edit </th>
-                        <th>Status </th>
-                        
+                        <th>Select</th> --}}
                         
                     </thead>
 
                     <tbody>
                         @foreach ($storedTasks as $storedTask)
-                        <tr @if ($storedTask->completed)
-                                class="strikeout"
-                                @endif>
-                          
-                            <td>{{ $storedTask->name }}</td>
-                        <td><a href="{{ route('tasks.edit', ['tasks'=>$storedTask->id])}}" class='btn btn-default'>Edit</a></td>
-                            
-                            <td>
-                                @if ($storedTask->completed)
-                                    Completed
-                                
+                        <tr class="row" >
+                          <td class="col-md-8" @if ($storedTask->completed)
+                                style="color: #dddddd;"
+                            @endif   >{{ $storedTask->name }}</td>
+                            <td class="col-md-2">
+                                @if (!$storedTask->completed)
+                                    <a href="{{ route('tasks.edit', ['tasks'=>$storedTask->id])}}" 
+                                    class='btn btn-default'><i class="far fa-edit"></i></a>
                                 @else
-                                    Pending
-                                @endif  
-                            </td> 
-                
+                                <form action="{{ route('tasks.destroy', [$storedTask->id]) }}" method='POST'>
+                                        {{ csrf_field() }}
+                                        
+                                            <input type="hidden" name='_method' value='DELETE'>
+                                            <button type="submit" class="btn btn-danger" value='Delete'><i class="fa fa-trash" aria-hidden="true"></i></button> 
+                                        
+                                           
+                                </form> 
+                                @endif
+                            
+                            </td>
+                            
+    
+                            <td class="col-md-2">
+                                <form action="{{ route('tasks.update', [$storedTask->id]) }}" method='POST'>
+                                    {{ csrf_field() }}
+                                <div class="btn-group" data-toggle="buttons">			
+                                    <label class="btn 
+                                    @if ($storedTask->completed)
+                                        btn-success active
+                                    @else
+                                        btn-default
+                                    @endif    
+                                        ">
+                                    
+                                                <input type="hidden" name='_method' value='PUT'>
+                                                                       
+                                                       
+                                                <input type="checkbox" name="checkBox" autocomplete="off" onchange="this.form.submit()" >
+                                                <span class="glyphicon glyphicon-ok"></span>
+                                            </label>
+                                </div>
+                                </form>            
+                            </td>
                         </tr>
                         
                         @endforeach
