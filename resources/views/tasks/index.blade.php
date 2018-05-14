@@ -63,7 +63,7 @@
                         @foreach ($storedTasks as $storedTask)
                         <tr class="row" >
                           <td class="col-md-8" @if ($storedTask->completed)
-                                style="color: #dddddd;"
+                                style="color: #A9A9A9;"
                             @endif   >{{ $storedTask->name }}</td>
                             <td class="col-md-2">
                                 @if (!$storedTask->completed)

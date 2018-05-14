@@ -9,6 +9,7 @@
     <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
     <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{{ URL::to('/css/edit.blade.css') }}" type="text/css">
     <title>Todo Application - Edit Task</title>
 </head>
 <body>
@@ -48,7 +49,7 @@
                 </div>
                     <div class="form-group">
                         <input type="submit" value="Save Changes" class='btn btn-success btn-lg'>
-                        <a href="" class='btn btn-danger btn-lg pull-right'>Go Back</a>
+                        <a href="{{ route('tasks.index') }}" class='btn btn-danger btn-lg pull-right'>Go Back</a>
                     </div> 
                       
                 </form>

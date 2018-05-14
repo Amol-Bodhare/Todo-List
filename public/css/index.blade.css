@@ -7,3 +7,12 @@
 .btn.active span.glyphicon {				
 	opacity: 1;				
 }
+body {
+	background-image: url("background.png");
+}
+table {
+	background-color: white;
+}
+h1 {
+	color:white;
+}
