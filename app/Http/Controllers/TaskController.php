@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Task;
+use Illuminate\Support\Facades\Auth;
+use App\User;
 use Illuminate\Http\Request;
 use Session;
 
@@ -15,7 +17,8 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $tasks = Task::orderBy('id','desc')->get();
+        $user = Auth::user();
+        $tasks = Task::orderBy('id','desc')->where('email',$user->email)->get();
         return view('tasks.index')->with('storedTasks',$tasks);
     }
 
@@ -41,9 +44,11 @@ class TaskController extends Controller
             'taskName' => 'required|min:5|max:255',
         ]);
         $task = new Task;
+        $user = Auth::user();
 
         $task->name = $request->taskName;
         $task->completed = false;
+        $task->email = $user->email;
         $task->save();
 
         Session::flash('success','New task has been successfully added');
@@ -83,11 +88,12 @@ class TaskController extends Controller
      */
     public function update(Request $request,$id)
     {   
+        $user = Auth::user();
         if($request->has('updatedTaskName')) {
             $this->validate($request, [
                 'updatedTaskName' => 'required|min:5|max:255',
             ]);
-    
+            
             $task = Task::find($id);
                
             $task->name = $request->updatedTaskName;
