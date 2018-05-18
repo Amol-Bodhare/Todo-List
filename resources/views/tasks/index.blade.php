@@ -75,7 +75,7 @@
     <div class="container">
         <div class="col-md-offset-2 col-md-8">
             <div class="row">
-                <h1>Todo App</h1>
+                <h1>My Todo-List</h1>
             </div>
 
             

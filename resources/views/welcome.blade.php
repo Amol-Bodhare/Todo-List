@@ -9,7 +9,8 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    
         <!-- Styles -->
         <style>
             html, body {
@@ -19,6 +20,7 @@
                 font-weight: 100;
                 height: 100vh;
                 margin: 0;
+                background-image: url("http://localhost:8000/css/background.png");
             }
 
             .full-height {
@@ -43,30 +45,37 @@
 
             .content {
                 text-align: center;
+                color:white;
+                
             }
 
-            .title {
-                font-size: 84px;
+            #title {
+                font-size: 10vw;
+                margin-top: 10%;
             }
 
             .links > a {
                 color: #636b6f;
                 padding: 0 25px;
-                font-size: 12px;
+                font-size: 20px;
                 font-weight: 600;
                 letter-spacing: .1rem;
                 text-decoration: none;
                 text-transform: uppercase;
+                color:white;
             }
-
-            .m-b-md {
-                margin-bottom: 30px;
+            @media screen and (min-width: 1200px) {
+                #title {
+                    margin-bottom: 30px;
+                    font-size: 75px;
+                    color: white;
+                }
             }
         </style>
     </head>
     <body>
         <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
+            {{-- @if (Route::has('login'))
                 <div class="top-right links">
                     @if (Auth::check())
                         <a href="{{ url('/home') }}">Home</a>
@@ -75,21 +84,23 @@
                         <a href="{{ url('/register') }}">Register</a>
                     @endif
                 </div>
-            @endif
+            @endif --}}
 
             <div class="content">
-                <div class="title m-b-md">
-                    Laravel
+                <div id="title">
+                    Todo Application
                 </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+                <div class="links" style="margin-top: 10%;">
+                        @if (Auth::check())
+                            <p>You are logged in!</p>
+                            <a href="{{ url('/tasks') }}">My List</a>
+                        @else
+                            <a href="{{ url('/login/google') }}">Login with <i class="fab fa-google-plus-g"></i></a>
+                            
+                        @endif
+                    </div>
             </div>
+           
         </div>
     </body>
 </html>
