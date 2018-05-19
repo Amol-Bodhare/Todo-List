@@ -100,7 +100,7 @@ class TaskController extends Controller
     
             $task->save();
             echo("heyU");
-            Session::flash('success','Task #'. $id . 'has been successfully updated');
+            Session::flash('success','Task : '. $task->name . ' has been successfully updated');
         
         }  else {
             if($request->has('checkBox')) {
@@ -109,7 +109,7 @@ class TaskController extends Controller
                 $task->completed = false;
     
                 $task->save();
-                Session::flash('success','Task #'. $id . 'is pending');
+                Session::flash('success','Task : '. $task->name . ' is pending');
                 
             } else {
                 $task = Task::find($id);
@@ -117,7 +117,7 @@ class TaskController extends Controller
                 $task->completed = true;
     
                 $task->save();
-                Session::flash('success','Task #'. $id . 'has been completed');
+                Session::flash('success','Task : '. $task->name . ' has been completed');
             }
         }
        
@@ -136,7 +136,7 @@ class TaskController extends Controller
         $task = Task::find($id);
         $task->delete();
         echo("heyD");
-        Session::flash('success', 'Task #' . $id . 'has been successfully deleted');
+        Session::flash('success', 'Task : ' . $task->name . ' has been successfully deleted');
         return redirect()->route('tasks.index');
     }
 }
